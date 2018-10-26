@@ -11,12 +11,12 @@ const Home = () => (
         <Col xl="6" className="py-5 scroll-y">
             <h3 className="mb-4">Ultimas entregas</h3>
 
-            <CustomCard cardtype={"recent"} deliverystate={"success"} />
-            <CustomCard cardtype={"recent"} deliverystate={"success"} />
-            <CustomCard cardtype={"recent"} deliverystate={"fail"} />
-            <CustomCard cardtype={"recent"} deliverystate={"success"} />
-            <CustomCard cardtype={"recent"} deliverystate={"fail"} />
-            <CustomCard cardtype={"recent"} deliverystate={"success"} />
+            <CustomCard cardtype={"recent"} cardstyle={"success"} />
+            <CustomCard cardtype={"recent"} cardstyle={"success"} />
+            <CustomCard cardtype={"recent"} cardstyle={"fail"} />
+            <CustomCard cardtype={"recent"} cardstyle={"success"} />
+            <CustomCard cardtype={"recent"} cardstyle={"fail"} />
+            <CustomCard cardtype={"recent"} cardstyle={"success"} />
 
             <CustomButton color="primary" className="mb-5">Ver todas las entregas</CustomButton>
         </Col>
@@ -26,9 +26,9 @@ const Home = () => (
 
             <CustomCard>
                 <p><CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Unidad 3</CustomButton></p>
-                <CustomCard cardtype={"incomplete"} deliverystate={"pending"} />
-                <CustomCard cardtype={"incomplete"} deliverystate={"pending"} />
-                <CustomCard cardtype={"incomplete"} deliverystate={"pending"} />
+                <CustomCard cardtype={"common"} cardstyle={"pending"} />
+                <CustomCard cardtype={"common"} cardstyle={"pending"} />
+                <CustomCard cardtype={"common"} cardstyle={"pending"} />
             </CustomCard>
 
             <p><strong>Unidades completas</strong></p>
@@ -36,12 +36,12 @@ const Home = () => (
             <CustomCard>
                 <p><CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Unidad 2</CustomButton></p>
 
-                <CustomCard cardtype={"complete"} deliverystate={"fail"} />
-                <CustomCard cardtype={"complete"} deliverystate={"success"} />
-                <CustomCard cardtype={"complete"} deliverystate={"success"} />
-                <CustomCard cardtype={"incomplete"} deliverystate={"pending"} />
-                <CustomCard cardtype={"complete"} deliverystate={"fail"} />
-                <CustomCard cardtype={"complete"} deliverystate={"fail"} />
+                <CustomCard cardtype={"common"} cardstyle={"fail"} />
+                <CustomCard cardtype={"common"} cardstyle={"success"} />
+                <CustomCard cardtype={"common"} cardstyle={"success"} />
+                <CustomCard cardtype={"common"} cardstyle={"pending"} />
+                <CustomCard cardtype={"common"} cardstyle={"fail"} />
+                <CustomCard cardtype={"common"} cardstyle={"fail"} />
 
             </CustomCard>
 

@@ -14,14 +14,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const StyledCustomCard = styled(Card)`
     &&& {
         border-radius: 7px;
-        border: none
+        border: ${(props) => (props.cardstyle === 'default') ? "#dedede solid thin" : "none"};
         transition: box-shadow .2s;
         background: ${
         (props) =>
-            (props.deliverystate === 'success') ? "linear-gradient(to right, #1bb0b1 0%,#52e8ab 100%)" :
-            (props.deliverystate === 'fail') ? "linear-gradient(to right, #c91e76 0%,#ff2a59 100%)" :
-            (props.deliverystate === 'pending') ? "linear-gradient(to right, rgba(89,19,142,1) 0%,rgba(43,71,255,1) 100%)" :
-            (props.deliverystate === 'draft') ? "linear-gradient(to right, #5994db 0%,#bed8d6 100%);" :
+            (props.cardstyle === 'success') ? "linear-gradient(to right, #1bb0b1 0%,#52e8ab 100%)" :
+            (props.cardstyle === 'fail') ? "linear-gradient(to right, #c91e76 0%,#ff2a59 100%)" :
+            (props.cardstyle === 'pending') ? "linear-gradient(to right, rgba(89,19,142,1) 0%,rgba(43,71,255,1) 100%)" :
+            (props.cardstyle === 'draft') ? "linear-gradient(to right, #5994db 0%,#bed8d6 100%);" :
             "#fff"
         };
     }
@@ -49,7 +49,7 @@ const StyledCustomCard = styled(Card)`
     a * {
         color: ${
         (props) =>
-            (props.deliverystate === 'success' || props.deliverystate === 'fail' || props.deliverystate === 'pending' || props.deliverystate === 'draft') ? "#ffffff !important" :
+            (props.cardstyle === 'success' || props.cardstyle === 'fail' || props.cardstyle === 'pending' || props.cardstyle === 'draft') ? "#ffffff !important" :
             "inherit"
         };
     }
@@ -69,7 +69,7 @@ const StyledCustomCard = styled(Card)`
     a:not(.btn):active * {
         color: ${
         (props) =>
-            (props.deliverystate === 'pending' || props.deliverystate === 'exercise-pending') ? "#12ffd7" : "#0056b3"
+            (props.cardstyle === 'pending' || props.cardstyle === 'exercise-pending') ? "#12ffd7" : "#0056b3"
         };
     }
 `;
@@ -104,19 +104,13 @@ class CustomCard extends React.Component {
                         </CardBody>;
                 break;
 
-            case 'incomplete':
+            case 'common':
                 cardDOM = <CardBody className="d-flex justify-content-between align-items-center" tag="a" href="/">
                             <div>
                                 <img className="rounded-circle mr-2" src="img/pic.jpg" width="30" height="30" alt="" /> Nombre Apellido Alumno
                             </div>
                             <div>Falta resolver 1 ejercicio <FontAwesomeIcon icon="caret-right" className="ml-3" /></div>
-                        </CardBody>;
-                break;
-
-            case 'complete':
-                cardDOM = <CardBody className="d-flex justify-content-between align-items-center" tag="a" href="#">
-                            <div> <img className="rounded-circle mr-2" src="/img/pic.jpg" width="30" height="30" alt="" /> Nombre Apellido Alumno </div>
-                            <div className="d-flex align-items-center">Promedio <span className="score">9</span> <FontAwesomeIcon icon="caret-right" className="ml-2" /></div>
+                            {/* <div className="d-flex align-items-center">Promedio <span className="score">9</span> <FontAwesomeIcon icon="caret-right" className="ml-3" /></div> */}
                         </CardBody>;
                 break;
 
@@ -126,7 +120,7 @@ class CustomCard extends React.Component {
         }
 
         return (
-            <StyledCustomCard cardtype={cardtype} deliverystate={this.props.deliverystate} className="mb-3">
+            <StyledCustomCard cardtype={cardtype} cardstyle={this.props.cardstyle} className="mb-3">
                 {cardDOM}
             </StyledCustomCard>
         );

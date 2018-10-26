@@ -16,10 +16,11 @@ import CustomButton from '../components/CustomButton';
 import Layout from '../components/Layout';
 import CustomCard from '../components/CustomCard';
 
-const AddUnit = () => (
+const Exercise = () => (
     <Layout>
         <Col xl="6" className="pt-5 scroll-y">
 
+            <p><CustomButton color="primary" size="sm" className="btn-rounded mb-0" tag="a" href="#">Nombre Unidad</CustomButton></p>
             <h3 className="mb-4">Nombre Ejercicio</h3>
 
             <CustomCard>
@@ -43,19 +44,20 @@ const AddUnit = () => (
 
                     <FormGroup row>
                         <Col md="6">
-                            <Label for="unitState">Estado</Label>
-                            <CustomInput type="select" id="unitState" name="unitState">
+                            <Label for="exerciseState">Estado</Label>
+                            <CustomInput type="select" id="exerciseState" name="exerciseState">
                                 <option value="">Borrador</option>
                                 <option>Publicado</option>
                                 <option>Pendiente</option>
                             </CustomInput>
                         </Col>
                         <Col md="6">
-                            <Label for="unitDate">Fecha de publicación</Label>
-                            <Input type="date" id="unitDate" name="unitDate" />
+                            <Label for="exerciseDate">Fecha de publicación</Label>
+                            <Input type="date" id="exerciseDate" name="exerciseDate" />
                         </Col>
                     </FormGroup>
 
+                    <CustomButton color="secondary" className="mr-2">Probar Ejercicio</CustomButton>
                     <CustomButton color="primary">Guardar</CustomButton>
 
                 </Form>
@@ -79,4 +81,4 @@ const AddUnit = () => (
     </Layout>
 );
 
-export default AddUnit;
+export default Exercise;

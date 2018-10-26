@@ -60,9 +60,9 @@ const Unit = () => (
 
             <CustomCard>
                 <p><CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#"><FontAwesomeIcon icon="plus-circle" className="mr-2" /> Agregar Ejercicio</CustomButton></p>
-                <CustomCard cardtype={"incomplete"} deliverystate={"draft"} />
-                <CustomCard cardtype={"incomplete"} deliverystate={"pending"} />
-                <CustomCard cardtype={"incomplete"} deliverystate={"success"} />
+                <CustomCard cardtype={"common"} cardstyle={"draft"} />
+                <CustomCard cardtype={"common"} cardstyle={"pending"} />
+                <CustomCard cardtype={"common"} cardstyle={"success"} />
             </CustomCard>
 
         </Col>
