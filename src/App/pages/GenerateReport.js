@@ -1,13 +1,11 @@
 import React from 'react';
 
 import {
-    Row, 
     Col,
     Form,
     FormGroup,
     Label,
-    Input,
-    CustomInput
+    Input
 } from 'reactstrap';
 
 import CustomButton from '../components/CustomButton';

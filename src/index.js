@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import Router from './App/Router';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-datetime/css/react-datetime.css';
 import './App/App.css';
 
 import WebFont from 'webfontloader';

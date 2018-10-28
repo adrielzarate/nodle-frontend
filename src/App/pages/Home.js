@@ -18,7 +18,7 @@ const Home = () => (
             <CustomCard cardtype={"recent"} cardstyle={"fail"} />
             <CustomCard cardtype={"recent"} cardstyle={"success"} />
 
-            <CustomButton color="primary" className="mb-5">Ver todas las entregas</CustomButton>
+            <CustomButton color="primary" className="mb-5" tag="a" href="/recent-deliveries">Ver todas las entregas</CustomButton>
         </Col>
         <Col xl="6" className="py-5 scroll-y">
             <h3 className="mb-4">Estado de la materia</h3>

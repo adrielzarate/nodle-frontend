@@ -1,19 +1,14 @@
 import React from 'react';
 
 import {
-    Row,
     Col,
     Form,
     FormGroup,
     Label,
-    Input,
-    CustomInput
+    Input
 } from 'reactstrap';
 import Switch from "react-switch";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import CustomButton from '../components/CustomButton';
 import Layout from '../components/Layout';
 import CustomCard from '../components/CustomCard';
 

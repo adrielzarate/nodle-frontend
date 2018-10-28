@@ -13,6 +13,7 @@ import Asistants from './pages/Asistants';
 import Asistant from './pages/Asistant';
 import AddAssistant from './pages/AddAssistant';
 import GenerateReport from './pages/GenerateReport';
+import RecentDeliveries from './pages/RecentDeliveries';
 import NotFound from './pages/NotFound';
 
 // Font Awesome
@@ -35,6 +36,7 @@ const Router = () => (
             <Route exact path="/asistant" component={Asistant} />
             <Route exact path="/add-assistant" component={AddAssistant} />
             <Route exact path="/generate-report" component={GenerateReport} />
+            <Route exact path="/recent-deliveries" component={RecentDeliveries} />
             <Route component={NotFound} />
         </Switch>
     </BrowserRouter>

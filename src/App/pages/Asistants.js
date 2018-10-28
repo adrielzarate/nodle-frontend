@@ -1,16 +1,12 @@
 import React from 'react';
 
 import {
-    Row,
     Col,
     Form,
     FormGroup,
     Label,
-    Input,
-    CustomInput
+    Input
 } from 'reactstrap';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CustomButton from '../components/CustomButton';
 import Layout from '../components/Layout';
