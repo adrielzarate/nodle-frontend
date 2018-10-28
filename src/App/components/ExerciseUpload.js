@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 
 import {
     Col,
@@ -9,8 +9,6 @@ import {
     Input,
     CustomInput
 } from 'reactstrap';
-
-// import axios from 'axios';
 
 import * as Datetime from 'react-datetime';
 
@@ -22,9 +20,10 @@ class ExerciseUpload extends React.Component {
         super(props);
 
         this.state = {
-            selectedDate: Datetime.moment().format('DD/MM/YYYY'),
+            selectedDate: Datetime.moment(),
             selectedState: 'published',
-            datePickerDisabled: false
+            datePickerDisabled: false,
+            redirect: false
         };
 
         this.yesterday = Datetime.moment().subtract( 1, 'day' );
@@ -32,7 +31,6 @@ class ExerciseUpload extends React.Component {
 
         this.unitName = 'Nombre Unidad';
         this.exerciseName = React.createRef();
-        this.exerciseState = React.createRef();
         this.exerciseDateRef = React.createRef();
         this.exercisePackage = React.createRef();
     }
@@ -53,14 +51,14 @@ class ExerciseUpload extends React.Component {
 
         this.setState({ selectedState: ev.target.value });
 
-        if ( ev.target.value === 'published' ) this.setState({ selectedDate: Datetime.moment().format('DD/MM/YYYY') });
+        if ( ev.target.value === 'published' ) this.setState({ selectedDate: Datetime.moment() });
 
         if ( ev.target.value === 'pending' ) {
-            this.setState({ selectedDate: Datetime.moment().add(1, 'days').format('DD/MM/YYYY') });
+            this.setState({ selectedDate: Datetime.moment().add(1, 'days') });
         }
 
         if ( ev.target.value === 'draft' ) {
-            this.setState({ selectedDate: null });
+            this.setState({ selectedDate: Datetime.moment() });
             this.setState({ datePickerDisabled: true });
         } else {
             this.setState({ datePickerDisabled: false });
@@ -74,7 +72,7 @@ class ExerciseUpload extends React.Component {
         
         data.append('unitName', this.unitName);
         data.append('exerciseName', this.exerciseName.value);
-        data.append('exerciseState', this.exerciseState.value);
+        data.append('exerciseState', this.state.selectedState);
         data.append('exerciseDate', this.state.selectedDate);
         data.append('file', this.exercisePackage.files[0]);
     
@@ -82,13 +80,20 @@ class ExerciseUpload extends React.Component {
           method: 'POST',
           body: data,
         }).then((res) => {
-            return <Redirect to='/unit' />
+            this.setState({ redirect: true });
         });
     };
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/unit' />
+        }
+    }
    
     render() {
         return(
-
+            <React.Fragment>
+            {this.renderRedirect()}
             <Form onSubmit={this.handleUpload}>
                 
                 <FormGroup>
@@ -102,8 +107,7 @@ class ExerciseUpload extends React.Component {
                         <CustomInput type="select" 
                                      id="exerciseState" 
                                      name="exerciseState" 
-                                     value={this.state.selectedState} 
-                                     innerRef={select => (this.exerciseState = select)}
+                                     value={this.state.selectedState}
                                      onChange={this.updateState}
                         >
                             <option value="published">Publicado</option>
@@ -127,16 +131,14 @@ class ExerciseUpload extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-
                     <Label for="exercisePackage">Importar Ejercicio</Label>
                     <CustomInput type="file" id="exercisePackage" name="exercisePackage" innerRef={input => (this.exercisePackage = input)} />
-
                 </FormGroup>                    
 
                 <CustomButton color="primary">Guardar</CustomButton>
 
             </Form>
-
+            </React.Fragment>
 
         );
     }
