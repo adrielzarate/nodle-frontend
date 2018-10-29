@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { 
     Col,
     Form,
@@ -13,10 +14,23 @@ import {
     ModalBody
 } from 'reactstrap';
 
+import * as Datetime from 'react-datetime';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CustomButton from '../components/CustomButton';
 import CustomCard from '../components/CustomCard';
+
+const StyledIframe = styled.iframe`
+    border: none;
+    width: 100%;
+`;
+
+const StyledModal = styled(Modal)`
+    .modal-content {
+        height: 400px;
+    }
+`;
 
 class Exercise extends React.Component {
 
@@ -27,12 +41,14 @@ class Exercise extends React.Component {
           exercise: null,
           exerciseInfo: null,
           apiLoaded: false,
-          modal: false
+          modal: false,
+          redirect: false
         };
     }
 
     componentDidMount() {
         const { handle } = this.props.match.params;
+
         fetch(`/api/exercise/${handle}`)
             .then(res => res.json())
             .then(json => {
@@ -49,6 +65,24 @@ class Exercise extends React.Component {
             });
     }
 
+    removeExercise = (ev) => {
+        ev.preventDefault();
+
+        const { handle } = this.props.match.params;
+    
+        fetch(`/api/exercise/${handle}`, {
+          method: 'DELETE',
+        }).then((res) => {
+            this.setState({ redirect: true });
+        });
+    };
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/unit' />
+        }
+    }
+
     toggleModal = () => {
         this.setState({
           modal: !this.state.modal
@@ -61,6 +95,7 @@ class Exercise extends React.Component {
 
         if(apiLoaded) {
             exerciseBlock = <React.Fragment>
+                                {this.renderRedirect()}
                                 <Col xl="6" className="pt-5 scroll-y">
                                     <p><CustomButton color="primary" size="sm" className="btn-rounded mb-0" tag={Link} to="/unit">{this.state.exercise.unitName}</CustomButton></p>
                                     <h3 className="mb-4">{this.state.exercise.exerciseName}</h3>
@@ -69,7 +104,7 @@ class Exercise extends React.Component {
                                         <Form>
                                             <FormGroup>
                                                 <Label for="exerciseName">Nombre del Ejercicio</Label>
-                                                <Input type="text" id="exerciseName" name="exerciseName" />
+                                                <Input type="text" id="exerciseName" name="exerciseName" defaultValue={this.state.exercise.exerciseName} />
                                             </FormGroup>
                                             <Media>
                                                 <Media left >
@@ -77,22 +112,33 @@ class Exercise extends React.Component {
                                                 </Media>
                                                 <Media body>
                                                     <h5 className="mt-0">Nombre original: {this.state.exerciseInfo.name}</h5>
-                                                    <p className="mb-1"><strong>Tipo de ejercicio: {this.state.exerciseInfo.type}</strong></p>
+                                                    <p className="mb-1"><strong>Autor:</strong>  {this.state.exerciseInfo.author}</p>
+                                                    <p className="mb-1"><strong>Tipo de ejercicio:</strong> {this.state.exerciseInfo.type}</p>
                                                     <p>{this.state.exerciseInfo.description}</p>
                                                 </Media>
                                             </Media>
                                             <FormGroup row className="mt-3">
                                                 <Col md="6">
                                                     <Label for="exerciseState">Estado</Label>
-                                                    <CustomInput type="select" id="exerciseState" name="exerciseState">
-                                                        <option value="">Borrador</option>
-                                                        <option>Publicado</option>
-                                                        <option>Pendiente</option>
+                                                    <CustomInput type="select" 
+                                                        id="exerciseState" 
+                                                        name="exerciseState" 
+                                                        value={this.state.exerciseState}
+                                                    >
+                                                        <option value="published">Publicado</option>
+                                                        <option value="draft">Borrador</option>
+                                                        <option value="pending">Pendiente</option>
                                                     </CustomInput>
                                                 </Col>
                                                 <Col md="6">
                                                     <Label for="exerciseDate">Fecha de publicación</Label>
-                                                    <Input type="date" id="exerciseDate" name="exerciseDate" />
+                                                    <Datetime id="exerciseDate" 
+                                                              name="exerciseDate"
+                                                              timeFormat={false}
+                                                              closeOnSelect={true}
+                                                              value={this.state.exercise.exerciseDate}
+                                                              dateFormat="DD/MM/YYYY"
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                             <CustomButton color="primary">Guardar</CustomButton>
@@ -111,14 +157,14 @@ class Exercise extends React.Component {
                                     </CustomCard>
                                 </Col>
                                 <Col className="py-5">
-                                    <CustomButton color="danger" className="mt-3"><FontAwesomeIcon icon="trash-alt" className="mr-2" /> Eliminar este Ejercicio</CustomButton>
+                                    <CustomButton color="danger" className="mt-3" onClick={this.removeExercise} ><FontAwesomeIcon icon="trash-alt" className="mr-2" /> Eliminar este Ejercicio</CustomButton>
                                 </Col>
-                                <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                                <StyledModal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                                     <ModalHeader toggle={this.toggleModal}>{this.state.exercise.exerciseName}</ModalHeader>
-                                    <ModalBody>
-                                        <iframe src={`http://localhost:3000/exercises/${this.state.exercise.exerciseFolder}`} title={this.toggleModal}>{this.state.exercise.exerciseName}></iframe>
+                                    <ModalBody className="d-flex align-items-stretch">
+                                        <StyledIframe src={`http://localhost:3000/exercises/${this.state.exercise.exerciseFolder}`}></StyledIframe>
                                     </ModalBody>
-                                </Modal>
+                                </StyledModal>
                             </React.Fragment>;
         } else {
             exerciseBlock = <div>Loading</div>;

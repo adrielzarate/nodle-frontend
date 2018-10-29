@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const StyledCustomCard = styled(Card)`
     &&& {
         border-radius: 7px;
-        border: ${(props) => (props.cardstyle === 'default') ? "#dedede solid thin" : "none"};
+        border: #dedede solid thin;
         transition: box-shadow .2s;
         background: ${
         (props) =>
