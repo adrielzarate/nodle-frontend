@@ -51,7 +51,8 @@ class Layout extends React.Component {
                         <MainNavigation isOpen={this.state.isOpen} />
                         <Col md="8" xl="10" tag="main">
                             <Row className="h-100p">
-                                {this.props.children}
+                                {/* {this.props.children} */}
+                                {React.cloneElement(this.props.children, this.props)}
                             </Row>
                         </Col>
                     </Row>

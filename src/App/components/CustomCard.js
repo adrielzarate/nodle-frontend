@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
@@ -90,8 +91,8 @@ class CustomCard extends React.Component {
                                     <img className="rounded-circle mr-2" src="/img/user-a.jpg" width="60" height="60" alt="" />
                                     <div>
                                         <CardTitle tag="p">
-                                            <CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Nombre Ejercicio</CustomButton>
-                                            <CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Nombre Unidad</CustomButton>
+                                            <CustomButton color="primary" size="sm" className="btn-rounded" tag={Link} to="/">Nombre Ejercicio</CustomButton>
+                                            <CustomButton color="primary" size="sm" className="btn-rounded" tag={Link} to="/">Nombre Unidad</CustomButton>
                                         </CardTitle>
                                         <p className="card-text"><a href="/">Nombre Apellido Alumno</a></p>
                                     </div>
@@ -105,7 +106,7 @@ class CustomCard extends React.Component {
                 break;
 
             case 'common':
-                cardDOM = <CardBody className="d-flex justify-content-between align-items-center" tag="a" href="/">
+                cardDOM = <CardBody className="d-flex justify-content-between align-items-center" tag={Link} to="/">
                             <div>
                                 <img className="rounded-circle mr-2" src="img/pic.jpg" width="30" height="30" alt="" /> Nombre Apellido Alumno
                             </div>

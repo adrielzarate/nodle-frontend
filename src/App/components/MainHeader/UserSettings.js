@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { 
     ButtonDropdown,
     DropdownToggle,
@@ -31,8 +31,8 @@ import {
                     <img className="rounded-circle" src="img/user-a.jpg" width="30" height="30" alt=" " />
                 </DropdownToggle>
                 <DropdownMenu right>
-                    <DropdownItem tag="a" className="text-right" href="#">User Settings</DropdownItem>
-                    <DropdownItem tag="a" className="text-right" href="#">Logout</DropdownItem>
+                    <DropdownItem className="text-right" tag={Link} to="#">User Settings</DropdownItem>
+                    <DropdownItem className="text-right" tag={Link} to="#">Logout</DropdownItem>
                 </DropdownMenu>
             </ButtonDropdown>  
         );

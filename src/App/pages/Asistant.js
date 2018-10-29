@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { 
     Col,
     Media
@@ -8,11 +8,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CustomButton from '../components/CustomButton';
-import Layout from '../components/Layout';
 import CustomCard from '../components/CustomCard';
 
 const Asistant = () => (
-    <Layout>
+    <React.Fragment>
         <Col xl="6" className="py-5 scroll-y">
             <Media className="d-flex align-items-center mb-5">
                 <Media left >
@@ -32,7 +31,7 @@ const Asistant = () => (
 
             <CustomCard>
                 <div className="d-flex align-items-center pb-4 pt-2">
-                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Unidad 3</CustomButton></div>
+                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag={Link} to="#">Unidad 3</CustomButton></div>
                 </div>
                 <CustomCard cardtype={"common"} cardstyle={"default"} />
                 <CustomCard cardtype={"common"} cardstyle={"default"} />
@@ -41,7 +40,7 @@ const Asistant = () => (
 
             <CustomCard>
                 <div className="d-flex align-items-center pb-4 pt-2">
-                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Unidad 2</CustomButton></div>
+                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag={Link} to="#">Unidad 2</CustomButton></div>
                 </div>
                 <CustomCard cardtype={"common"} cardstyle={"default"} />
                 <CustomCard cardtype={"common"} cardstyle={"default"} />
@@ -52,7 +51,7 @@ const Asistant = () => (
             </CustomCard>
 
         </Col>
-    </Layout>
+    </React.Fragment>
 );
 
 export default Asistant;

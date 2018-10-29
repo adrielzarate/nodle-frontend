@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import CustomButton from '../CustomButton';
@@ -19,7 +20,7 @@ const StyledBtnNotifications = styled(CustomButton)`
 `;
 
 const BtnNotifications = () => (
-    <StyledBtnNotifications outline color="primary" tag="a" href="#"><FontAwesomeIcon icon="bell" /></StyledBtnNotifications>
+    <StyledBtnNotifications outline color="primary" tag={Link} to="#"><FontAwesomeIcon icon="bell" /></StyledBtnNotifications>
 );
 
 export default BtnNotifications

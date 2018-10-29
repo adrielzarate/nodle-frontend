@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { 
     Col,
     Media
@@ -8,11 +8,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CustomButton from '../components/CustomButton';
-import Layout from '../components/Layout';
 import CustomCard from '../components/CustomCard';
 
 const Student = () => (
-    <Layout>
+    <React.Fragment>
         <Col xl="6" className="py-5 scroll-y">
             <Media className="d-flex align-items-center mb-5">
                 <Media left >
@@ -33,7 +32,7 @@ const Student = () => (
 
             <CustomCard>
                 <div className="d-flex align-items-center pb-4 pt-2">
-                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Unidad 3</CustomButton></div>
+                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag={Link} to="#">Unidad 3</CustomButton></div>
                     <div>Incompleta</div>
                 </div>
                 <CustomCard cardtype={"common"} cardstyle={"pending"} />
@@ -43,7 +42,7 @@ const Student = () => (
 
             <CustomCard>
                 <div className="d-flex align-items-center pb-4 pt-2">
-                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag="a" href="#">Unidad 2</CustomButton></div>
+                    <div className="flex-grow-1"><CustomButton color="primary" size="sm" className="btn-rounded" tag={Link} to="#">Unidad 2</CustomButton></div>
                     <div>Completada - <strong>Promedio</strong></div> <span className="score ml-2">9</span>
                 </div>
                 <CustomCard cardtype={"common"} cardstyle={"fail"} />
@@ -55,7 +54,7 @@ const Student = () => (
             </CustomCard>
 
         </Col>
-    </Layout>
+    </React.Fragment>
 );
 
 export default Student;

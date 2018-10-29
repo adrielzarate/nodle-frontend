@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import Layout from './components/Layout';
 import Home from './pages/Home';
 import Settings from './pages/Settings';
 import Unit from './pages/Unit';
@@ -22,24 +23,26 @@ import { faFileSignature, faUserGraduate, faPlusCircle, faChalkboardTeacher, faF
 library.add(faFileSignature, faUserGraduate, faPlusCircle, faChalkboardTeacher, faFileAlt, faCog, faCaretRight, faBell, faBars, faTimes, faTrashAlt, faBan );
 
 const Router = () => (
-    <BrowserRouter>
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/settings" component={Settings} />
-            <Route exact path="/unit" component={Unit} />
-            <Route exact path="/add-unit" component={AddUnit} />
-            <Route exact path="/exercise" component={Exercise} />
-            <Route exact path="/add-exercise" component={AddExercise} />
-            <Route exact path="/students" component={Students} />
-            <Route exact path="/student" component={Student} />
-            <Route exact path="/asistants" component={Asistants} />
-            <Route exact path="/asistant" component={Asistant} />
-            <Route exact path="/add-assistant" component={AddAssistant} />
-            <Route exact path="/generate-report" component={GenerateReport} />
-            <Route exact path="/recent-deliveries" component={RecentDeliveries} />
-            <Route component={NotFound} />
-        </Switch>
-    </BrowserRouter>
+        <BrowserRouter>
+            <Layout>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/settings" component={Settings} />
+                    <Route path="/unit" component={Unit} />
+                    <Route path="/add-unit" component={AddUnit} />
+                    <Route path="/exercise/:handle" component={Exercise} />
+                    <Route path="/add-exercise" component={AddExercise} />
+                    <Route path="/students" component={Students} />
+                    <Route path="/student" component={Student} />
+                    <Route path="/asistants" component={Asistants} />
+                    <Route path="/asistant" component={Asistant} />
+                    <Route path="/add-assistant" component={AddAssistant} />
+                    <Route path="/generate-report" component={GenerateReport} />
+                    <Route path="/recent-deliveries" component={RecentDeliveries} />
+                    <Route component={NotFound} />
+                </Switch>
+            </Layout>
+        </BrowserRouter>
 );
 
 export default Router;

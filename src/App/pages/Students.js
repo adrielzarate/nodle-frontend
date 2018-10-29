@@ -9,7 +9,6 @@ import {
 } from 'reactstrap';
 import Switch from "react-switch";
 
-import Layout from '../components/Layout';
 import CustomCard from '../components/CustomCard';
 
 class Students extends React.Component {
@@ -26,11 +25,10 @@ constructor() {
 
     render() {
         return(
-        <Layout>
             <Col xl="6" className="pt-5 scroll-y">
-    
+
                 <h3 className="mb-4">Alumnos</h3>
-    
+
                 <CustomCard>
                     <Form className="mb-4">
                         <FormGroup row>
@@ -58,8 +56,6 @@ constructor() {
                     <CustomCard cardtype={"common"} cardstyle={"success"} />
                 </CustomCard>
             </Col>
-        </Layout>
-    
         );
     }
 }

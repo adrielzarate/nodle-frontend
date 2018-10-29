@@ -8,6 +8,8 @@ import CustomButton from '../CustomButton';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { Link } from 'react-router-dom';
+
 const StyledMainNavigation = styled.nav`
 
     &&& {
@@ -64,25 +66,25 @@ class MainNavigation extends React.Component {
                     <span>4</span>
                 </StyledButton>
                 <Collapse isOpen={this.state.collapse}>
-                    <StyledButton className="d-block text-left"href="/add-unit" >
+                    <StyledButton className="d-block text-left" tag={Link} to="/add-unit" >
                         <FontAwesomeIcon icon="plus-circle" className="mr-2" />
                         <div className="d-inline-block">Agregar Unidad</div>
                     </StyledButton>
                     <StyledButton className="d-block text-left">Nombre Unidad</StyledButton>
                     <StyledButton className="d-block text-left">Nombre Unidad</StyledButton>
                 </Collapse>
-                <StyledButton color="primary" tag="a" href="/students" className="d-flex justify-content-between align-items-center">
+                <StyledButton color="primary" tag={Link} to="/students" className="d-flex justify-content-between align-items-center">
                     <div><FontAwesomeIcon icon="user-graduate" className="mr-2" /> Alumnos</div>
                     <span>30</span>
                 </StyledButton>
-                <StyledButton color="primary" tag="a"href="/asistants" className="d-flex justify-content-between align-items-center">
+                <StyledButton color="primary" tag={Link} to="/asistants" className="d-flex justify-content-between align-items-center">
                     <div><FontAwesomeIcon icon="chalkboard-teacher" className="mr-2" /> Colaboradores</div>
                     <span>2</span>
                 </StyledButton>
-                <StyledButton color="primary" tag="a"href="/generate-report" className="d-flex justify-content-between align-items-center">
+                <StyledButton color="primary" tag={Link} to="/generate-report" className="d-flex justify-content-between align-items-center">
                     <div><FontAwesomeIcon icon="file-alt" className="mr-2" /> Generar reporte</div>
                 </StyledButton>
-                <StyledButton color="primary" tag="a" href="/settings" className="d-flex justify-content-between align-items-center mb-auto">
+                <StyledButton color="primary" tag={Link} to="/settings" className="d-flex justify-content-between align-items-center mb-auto">
                     <div><FontAwesomeIcon icon="cog" className="mr-2" /> Settings</div>
                 </StyledButton>
             </StyledMainNavigation>
