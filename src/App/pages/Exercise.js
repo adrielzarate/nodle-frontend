@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CustomButton from '../components/CustomButton';
 import CustomCard from '../components/CustomCard';
+import Loading from '../components/Loading';
 
 const StyledIframe = styled.iframe`
     border: none;
@@ -47,21 +48,32 @@ class Exercise extends React.Component {
     }
 
     componentDidMount() {
+
         const { handle } = this.props.match.params;
 
-        fetch(`/api/exercise/${handle}`)
-            .then(res => res.json())
+        fetch(`http://localhost:3000/api/exercise/${handle}`)
+            .then(res => {
+                if(res.status === 200) return res.json();
+                else throw new Error(res.status);
+            })
             .then(json => {
                 this.setState({
                     exercise: json
                 });
                 return fetch(`http://localhost:3000/exercises/${this.state.exercise.exerciseFolder}/info.json`)
-            }).then(res => res.json())
+            })
+            .then(res => {
+                if(res.status === 200) return res.json();
+                else throw new Error(res.status);
+            })
             .then(json => {
                 this.setState({
                     exerciseInfo: json,
                     apiLoaded: true
                 });
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
     }
 
@@ -131,12 +143,12 @@ class Exercise extends React.Component {
                                                     </CustomInput>
                                                 </Col>
                                                 <Col md="6">
-                                                    <Label for="exerciseDate">Fecha de publicación</Label>
-                                                    <Datetime id="exerciseDate" 
-                                                              name="exerciseDate"
+                                                    <Label for="publicationDate">Fecha de publicación</Label>
+                                                    <Datetime id="publicationDate" 
+                                                              name="publicationDate"
                                                               timeFormat={false}
                                                               closeOnSelect={true}
-                                                              value={this.state.exercise.exerciseDate}
+                                                              value={this.state.exercise.publicationDate}
                                                               dateFormat="DD/MM/YYYY"
                                                     />
                                                 </Col>
@@ -162,12 +174,12 @@ class Exercise extends React.Component {
                                 <StyledModal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                                     <ModalHeader toggle={this.toggleModal}>{this.state.exercise.exerciseName}</ModalHeader>
                                     <ModalBody className="d-flex align-items-stretch">
-                                        <StyledIframe src={`http://localhost:3000/exercises/${this.state.exercise.exerciseFolder}`}></StyledIframe>
+                                        <StyledIframe sandbox="" src={`http://localhost:3000/exercise/${this.state.exercise.exerciseFolder}`}></StyledIframe>
                                     </ModalBody>
                                 </StyledModal>
                             </React.Fragment>;
         } else {
-            exerciseBlock = <div>Loading</div>;
+            exerciseBlock = <div className="w-100 d-flex align-items-center justify-content-center"><Loading /></div>;
         }
 
         return(

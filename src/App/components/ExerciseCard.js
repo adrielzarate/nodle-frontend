@@ -79,8 +79,7 @@ class CustomCard extends React.Component {
         return (
             <StyledCustomCard className="mb-3">
 
-                
-                <CardBody className="d-flex justify-content-between align-items-center" tag={Link} to={'/exercise/' + this.props.exerciseName }>
+                <CardBody className="d-flex justify-content-between align-items-center" tag={Link} to={'/exercise/' + this.props.exerciseFolder }>
                     <div>
                         <img className="rounded-circle mr-2" src="img/pic.jpg" width="30" height="30" alt="" /> {this.props.exerciseName}
                     </div>
