@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import {AppConsumer} from '../AppContext';
 import styled from 'styled-components';
 import { 
     Col,
@@ -79,13 +80,24 @@ class Exercise extends React.Component {
 
     removeExercise = (ev) => {
         ev.preventDefault();
-
         const { handle } = this.props.match.params;
     
         fetch(`/api/exercise/${handle}`, {
           method: 'DELETE',
         }).then((res) => {
-            this.setState({ redirect: true });
+            if(res.status === 200) {
+                this.setState({ redirect: true });
+                return fetch(`http://localhost:3000/remove/${handle}`, {
+                    method: 'DELETE'
+                });
+            }
+            else throw new Error(res.status);
+        })
+        .then( () => {
+            this.props.updateAlert(true, 'success', 'Archivo eliminado');
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
     };
 
@@ -190,4 +202,8 @@ class Exercise extends React.Component {
     }
 }
 
-export default Exercise;
+export default props => (
+    <AppConsumer>
+      {context => <Exercise {...props} updateAlert={context} />}
+    </AppConsumer>
+);

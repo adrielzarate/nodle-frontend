@@ -95,7 +95,7 @@ class ExerciseUpload extends React.Component {
         })
         .catch(error => {
             console.error('Error:', error);
-            this.props.updateAlert(true, 'warning', 'Hubo un problema cargando el ejercicio');
+            this.props.updateAlert(true, 'danger', 'Hubo un problema cargando el ejercicio');
         })
         .finally(() => {
             this.setState({ 

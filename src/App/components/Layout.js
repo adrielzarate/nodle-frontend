@@ -38,8 +38,8 @@ class Layout extends React.Component {
     state = {
         isOpen: false,
         alertVisible: false,
-        alertColor: 'danger',
-        alertMsg: 'test'
+        alertColor: '',
+        alertMsg: ''
     };
 
     toggleOpen = () => {
@@ -54,6 +54,10 @@ class Layout extends React.Component {
             alertColor,
             alertMsg
         });
+
+        setTimeout(() => {
+            this.dismissAlert();
+        }, 2000);
     }
 
     dismissAlert = () => {
@@ -70,8 +74,7 @@ class Layout extends React.Component {
                     <Row className="align-items-stretch h-100p">
                         <MainNavigation isOpen={this.state.isOpen} />
                         <Col md="8" xl="10" tag="main">
-                            <Row className="h-100p">
-
+                            <Row>
                                 <Col xs="12">
                                     <Alert 
                                         className="mt-4 mb-0" 
@@ -82,11 +85,11 @@ class Layout extends React.Component {
                                         {this.state.alertMsg}
                                     </Alert>
                                 </Col>
-
+                            </Row>
+                            <Row className="h-100p">
                                 <AppProvider value={this.updateAlert}>
                                     {React.cloneElement(this.props.children, this.props)}
                                 </AppProvider>
-
                             </Row>
                         </Col>
                     </Row>
