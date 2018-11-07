@@ -52,7 +52,7 @@ class Exercise extends React.Component {
 
         const { handle } = this.props.match.params;
 
-        fetch(`${process.env.BACKEND}/api/exercise/${handle}`)
+        fetch(`http://localhost:3000/api/exercise/${handle}`)
             .then(res => {
                 if(res.status === 200) return res.json();
                 else throw new Error(res.status);
@@ -61,7 +61,7 @@ class Exercise extends React.Component {
                 this.setState({
                     exercise: json
                 });
-                return fetch(`${process.env.BACKEND}/exercises/${this.state.exercise.exerciseFolder}/info.json`)
+                return fetch(`http://localhost:3000/exercises/${this.state.exercise.exerciseFolder}/info.json`)
             })
             .then(res => {
                 if(res.status === 200) return res.json();
@@ -87,7 +87,7 @@ class Exercise extends React.Component {
         }).then((res) => {
             if(res.status === 200) {
                 this.setState({ redirect: true });
-                return fetch(`${process.env.BACKEND}/remove/${handle}`, {
+                return fetch(`http://localhost:3000/remove/${handle}`, {
                     method: 'DELETE'
                 });
             }
@@ -132,7 +132,7 @@ class Exercise extends React.Component {
                                             </FormGroup>
                                             <Media>
                                                 <Media left >
-                                                    <img className="mr-3" src={`${process.env.BACKEND}/exercises/${this.state.exercise.exerciseFolder}/poster.jpg`} width="120" height="120" alt="" />
+                                                    <img className="mr-3" src={`http://localhost:3000/exercises/${this.state.exercise.exerciseFolder}/poster.jpg`} width="120" height="120" alt="" />
                                                 </Media>
                                                 <Media body>
                                                     <h5 className="mt-0">Nombre original: {this.state.exerciseInfo.name}</h5>
@@ -186,7 +186,7 @@ class Exercise extends React.Component {
                                 <StyledModal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                                     <ModalHeader toggle={this.toggleModal}>{this.state.exercise.exerciseName}</ModalHeader>
                                     <ModalBody className="d-flex align-items-stretch">
-                                        <StyledIframe sandbox="" src={`${process.env.BACKEND}/exercise/${this.state.exercise.exerciseFolder}`}></StyledIframe>
+                                        <StyledIframe sandbox="" src={`http://localhost:3000/exercise/${this.state.exercise.exerciseFolder}`}></StyledIframe>
                                     </ModalBody>
                                 </StyledModal>
                             </React.Fragment>;

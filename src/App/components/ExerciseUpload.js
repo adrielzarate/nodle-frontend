@@ -82,7 +82,7 @@ class ExerciseUpload extends React.Component {
         data.append('publicationDate', this.state.selectedDate);
         data.append('file', this.exercisePackage.files[0]);
 
-        fetch(`${process.env.BACKEND}/upload`, {
+        fetch(`http://localhost:3000/upload`, {
           method: 'POST',
           body: data
         })

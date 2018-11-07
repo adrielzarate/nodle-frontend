@@ -30,7 +30,7 @@ class Unit extends React.Component {
 
     componentDidMount() {
 
-        fetch(`${process.env.BACKEND}/api/exercises`)
+        fetch(`http://localhost:3000/api/exercises`)
             .then(res => {
                 if(res.status === 200) return res.json();
                 else throw new Error(res.status);
