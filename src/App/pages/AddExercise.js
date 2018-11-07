@@ -7,14 +7,14 @@ import CustomButton from '../components/CustomButton';
 import CustomCard from '../components/CustomCard';
 import ExerciseUpload from '../components/ExerciseUpload';
 
-const AddExercise = ({ updateAlert }) => (
+const AddExercise = () => (
     <Col xl="6" className="pt-5 scroll-y">
 
         <p><CustomButton color="primary" size="sm" className="btn-rounded mb-0" tag={Link} to="/unit">Nombre Unidad</CustomButton></p>
         <h3 className="mb-4">Agregar Ejercicio</h3>
 
         <CustomCard>
-            <ExerciseUpload updateAlert={updateAlert} />
+            <ExerciseUpload />
         </CustomCard>
     </Col>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { AppProvider } from '../AppContext';
 import styled, { createGlobalStyle } from 'styled-components';
 
 import { 
@@ -11,21 +11,6 @@ import {
 
 import MainHeader from './MainHeader/';
 import MainNavigation from './MainNavigation/';
-
-import Home from '../pages/Home';
-import Settings from '../pages/Settings';
-import Unit from '../pages/Unit';
-import AddUnit from '../pages/AddUnit';
-import Exercise from '../pages/Exercise';
-import AddExercise from '../pages/AddExercise';
-import Students from '../pages/Students';
-import Student from '../pages/Student';
-import Asistants from '../pages/Asistants';
-import Asistant from '../pages/Asistant';
-import AddAssistant from '../pages/AddAssistant';
-import GenerateReport from '../pages/GenerateReport';
-import RecentDeliveries from '../pages/RecentDeliveries';
-import NotFound from '../pages/NotFound';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -50,15 +35,12 @@ const StyledContainer = styled(Container)`
 
 class Layout extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { 
-            isOpen: false,
-            alertVisible: false,
-            alertColor: 'danger',
-            alertMsg: 'test'
-        };
-    }
+    state = {
+        isOpen: false,
+        alertVisible: false,
+        alertColor: 'danger',
+        alertMsg: 'test'
+    };
 
     toggleOpen = () => {
         this.setState(prevState => ({
@@ -101,22 +83,9 @@ class Layout extends React.Component {
                                     </Alert>
                                 </Col>
 
-                                <Switch>
-                                    <Route exact path="/" render={(props) => <Home {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/settings" render={(props) => <Settings {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/unit" render={(props) => <Unit {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/add-unit" render={(props) => <AddUnit {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/exercise/:handle" render={(props) => <Exercise {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/add-exercise" render={(props) => <AddExercise {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/students" render={(props) => <Students {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/student" render={(props) => <Student {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/asistants" render={(props) => <Asistants {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/asistant" render={(props) => <Asistant {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/add-assistant" render={(props) => <AddAssistant {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/generate-report" render={(props) => <GenerateReport {...props} updateAlert={this.updateAlert} />} />
-                                    <Route path="/recent-deliveries" render={(props) => <RecentDeliveries {...props} updateAlert={this.updateAlert} />} />
-                                    <Route component={NotFound} />
-                                </Switch>
+                                <AppProvider value={this.updateAlert}>
+                                    {React.cloneElement(this.props.children, this.props)}
+                                </AppProvider>
 
                             </Row>
                         </Col>

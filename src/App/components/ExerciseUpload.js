@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import {AppConsumer} from '../AppContext';
 
 import {
     Col,
@@ -35,6 +36,7 @@ class ExerciseUpload extends React.Component {
         this.exerciseName = React.createRef();
         this.publicationDateRef = React.createRef();
         this.exercisePackage = React.createRef();
+        
     }
     
     updateDate = (date) => {
@@ -89,10 +91,6 @@ class ExerciseUpload extends React.Component {
             else throw new Error(res.status);
         })
         .then( () => {
-            this.setState({ 
-                uploadingForm: false,
-                redirect: true,
-            });
             this.props.updateAlert(true, 'success', 'Carga del ejercicio exitosa');
         })
         .catch(error => {
@@ -121,6 +119,7 @@ class ExerciseUpload extends React.Component {
         if(!uploadingForm) {
             uploadForm = <React.Fragment>
                             {this.renderRedirect()}
+
                             <Form onSubmit={this.handleUpload}>
                                 <FormGroup>
                                     <Label for="exerciseName">Nombre del Ejercicio</Label>
@@ -174,8 +173,12 @@ class ExerciseUpload extends React.Component {
                 { uploadForm }
             </React.Fragment>
         );
-
+    
     }
- }
+}
 
- export default ExerciseUpload;
+export default props => (
+    <AppConsumer>
+      {context => <ExerciseUpload {...props} updateAlert={context} />}
+    </AppConsumer>
+);
