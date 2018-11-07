@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
+import {
     Col,
     Form,
     FormGroup,
@@ -20,7 +20,7 @@ class Unit extends React.Component {
 
     constructor(props) {
         super(props);
-    
+
         this.state = {
           exercises: [],
           errorUploading: false,
@@ -30,13 +30,13 @@ class Unit extends React.Component {
 
     componentDidMount() {
 
-        fetch('http://localhost:3000/api/exercises')
+        fetch(`${process.env.BACKEND}/api/exercises`)
             .then(res => {
                 if(res.status === 200) return res.json();
                 else throw new Error(res.status);
             })
             .then(data => {
-                this.setState({ 
+                this.setState({
                     exercises: data,
                     apiLoaded: true
                 });
@@ -58,22 +58,22 @@ class Unit extends React.Component {
 
             unitBlock = <React.Fragment>
                             <Col xl="6" className="pt-5 scroll-y">
-                    
+
                                 <h3 className="mb-4">Nombre de la Unidad</h3>
-                    
+
                                 <CustomCard>
                                     <Form>
-                                        
+
                                         <FormGroup>
                                             <Label for="unitName">Nombre de la Unidad</Label>
                                             <Input type="text" id="unitName" name="unitName" />
                                         </FormGroup>
-                                        
+
                                         <FormGroup>
                                             <Label for="unitDescription">Descripción</Label>
                                             <Input type="textarea" id="unitDescription" name="unitDescription" />
                                         </FormGroup>
-                    
+
                                         <FormGroup row>
                                             <Col md="6">
                                                 <Label for="unitState">Estado</Label>
@@ -88,16 +88,16 @@ class Unit extends React.Component {
                                                 <Input type="date" id="unitDate" name="unitDate" />
                                             </Col>
                                         </FormGroup>
-                    
+
                                         <CustomButton color="primary">Crear Unidad</CustomButton>
-                    
+
                                     </Form>
                                 </CustomCard>
                             </Col>
-                    
+
                             <Col xl="6" className="pt-5 scroll-y">
                                 <h3 className="mb-4">Ejercicios</h3>
-                    
+
                                 <CustomCard>
 
                                     <p><CustomButton color="primary" size="sm" className="btn-rounded" tag={Link} to="/add-exercise"><FontAwesomeIcon icon="plus-circle" className="mr-2" /> Agregar Ejercicio</CustomButton></p>
@@ -111,13 +111,13 @@ class Unit extends React.Component {
                                     )) }
 
                                 </CustomCard>
-                    
+
                             </Col>
-                            
+
                             <Col className="py-5">
                                 <CustomButton color="danger" className="mt-3"><FontAwesomeIcon icon="trash-alt" className="mr-2" /> Eliminar esta Unidad</CustomButton>
                             </Col>
-                    
+
                         </React.Fragment>;
         } else {
             unitBlock = <div className="w-100 d-flex align-items-center justify-content-center"><Loading /></div>;
@@ -130,6 +130,6 @@ class Unit extends React.Component {
         );
     }
 }
-    
+
 
 export default Unit;

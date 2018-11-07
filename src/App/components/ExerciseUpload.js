@@ -36,9 +36,9 @@ class ExerciseUpload extends React.Component {
         this.exerciseName = React.createRef();
         this.publicationDateRef = React.createRef();
         this.exercisePackage = React.createRef();
-        
+
     }
-    
+
     updateDate = (date) => {
 
         this.setState({ selectedDate: date._d });
@@ -68,21 +68,21 @@ class ExerciseUpload extends React.Component {
             this.setState({ datePickerDisabled: false });
         }
     };
-    
+
     handleUpload = (ev) => {
         ev.preventDefault();
-    
+
         this.setState({ uploadingForm: true });
 
         const data = new FormData();
-        
+
         data.append('unitName', this.unitName);
         data.append('exerciseName', this.exerciseName.value);
         data.append('exerciseState', this.state.selectedState);
         data.append('publicationDate', this.state.selectedDate);
         data.append('file', this.exercisePackage.files[0]);
-    
-        fetch('http://localhost:3000/upload', {
+
+        fetch(`${process.env.BACKEND}/upload`, {
           method: 'POST',
           body: data
         })
@@ -98,7 +98,7 @@ class ExerciseUpload extends React.Component {
             this.props.updateAlert(true, 'danger', 'Hubo un problema cargando el ejercicio');
         })
         .finally(() => {
-            this.setState({ 
+            this.setState({
                 uploadingForm: false,
                 redirect: true
             });
@@ -110,7 +110,7 @@ class ExerciseUpload extends React.Component {
             return <Redirect to='/unit' />
         }
     }
-   
+
     render() {
 
         const uploadingForm = this.state.uploadingForm;
@@ -129,9 +129,9 @@ class ExerciseUpload extends React.Component {
                                 <FormGroup row>
                                     <Col md="6 mb-3 mb-md-0">
                                         <Label for="exerciseState">Estado</Label>
-                                        <CustomInput type="select" 
-                                                    id="exerciseState" 
-                                                    name="exerciseState" 
+                                        <CustomInput type="select"
+                                                    id="exerciseState"
+                                                    name="exerciseState"
                                                     value={this.state.selectedState}
                                                     onChange={this.updateState}
                                         >
@@ -143,11 +143,11 @@ class ExerciseUpload extends React.Component {
                                     <Col md="6">
                                         <Label for="publicationDate">Fecha de publicación</Label>
                                         <Datetime isValidDate={ this.valid }
-                                                timeFormat={false} 
+                                                timeFormat={false}
                                                 dateFormat="DD/MM/YYYY"
-                                                id="publicationDate" 
-                                                name="publicationDate" 
-                                                onChange={this.updateDate} 
+                                                id="publicationDate"
+                                                name="publicationDate"
+                                                onChange={this.updateDate}
                                                 value={this.state.selectedDate}
                                                 closeOnSelect={true}
                                                 inputProps={{ disabled: this.state.datePickerDisabled }}
@@ -158,7 +158,7 @@ class ExerciseUpload extends React.Component {
                                 <FormGroup>
                                     <Label for="exercisePackage">Importar Ejercicio</Label>
                                     <CustomInput type="file" id="exercisePackage" name="exercisePackage" innerRef={input => (this.exercisePackage = input)} />
-                                </FormGroup>                    
+                                </FormGroup>
 
                                 <CustomButton color="primary">Guardar</CustomButton>
 
@@ -173,7 +173,7 @@ class ExerciseUpload extends React.Component {
                 { uploadForm }
             </React.Fragment>
         );
-    
+
     }
 }
 
